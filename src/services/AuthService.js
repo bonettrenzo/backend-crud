@@ -7,7 +7,7 @@ const createAuth = async (nameV, emailV, passwordV) => {
 
     /* CREACION DEL TOKEN DE AUTENTICACION */
     const secretKey = "MYKEY"
-    const payload = {nameV,emailV }
+    const payload = {emailV }
     const token = jwt.sign(payload, secretKey)
 
     try{
@@ -30,7 +30,7 @@ const createAuth = async (nameV, emailV, passwordV) => {
 const loginAuth = async (email, password) =>{
     /* CREACION DEL TOKEN */
     const secretKey = "MYKEY"
-    const payload = {email,password }
+    const payload = {email }
 
     const token = jwt.sign(payload, secretKey)
     try{

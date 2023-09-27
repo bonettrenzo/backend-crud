@@ -1,14 +1,19 @@
-import jwt, { decode } from "jsonwebtoken";
-import { generateSecretKey } from "../helpers/helpers.js";
 
-export default async function authenticateToken(req, res, next) {
-    const token = req.header("Authorization");
-    if (!token) return res.status(401).json({ message: "Acceso no autorizado" });
+import jwt from "jsonwebtoken";
 
-    try {
-        const decoded = await jwt.verify(token, "MYKEY");
-        next();
-    } catch (err) {
-        return res.status(403).json({ message: "Token inválido" });
+export default function authenticateToken(req, res, next) {
+
+    const bearerHeader = req.header("Authorization");
+    console.log(bearerHeader)
+    if(typeof bearerHeader !== "undefined"){
+        const bearerToken = bearerHeader.split(" ")[1]
+        req.token = bearerToken
+        next()
+    }else{
+        res.sendStatus(403).json({
+            error: "no tienes permisos para acceder",
+            success: false
+        })
     }
+
 }

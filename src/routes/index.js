@@ -23,10 +23,9 @@ router.use(express.json())
 router.route("/register").post(createAuth)
 router.route("/login").post(loginAuth)
 /* AUTH */
-
-/* router.use(authenticateToken)
- */
-
+ 
+/* MIDDLEWARE PARA AUTENTIAR EL TOKEN DE AUTENTIACION */
+router.use(authenticateToken) 
 
 /* CLIENTE */
 router.route("/clients").get(getAllClients)
